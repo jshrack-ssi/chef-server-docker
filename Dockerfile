@@ -11,5 +11,6 @@ RUN /scripts/install_chef_server.sh && mv /scripts/image_metadata.txt /etc/docke
 
 
 EXPOSE 443
+EXOPOSE 22
 ENTRYPOINT ["/bin/bash", "-c"]
 CMD ["/usr/bin/run_chef_server.sh"]
