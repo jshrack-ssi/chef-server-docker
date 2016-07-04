@@ -10,8 +10,27 @@ if [ x"$(hostname)" != x"$(grep server_name /etc/opscode/chef-server-running.jso
     chef-server-ctl reconfigure || /bin/bash
 fi
 
+## Manage
+apt-get update
+
 chef-server-ctl install opscode-manage
 
+rm -f /var/lib/apt/lists/partial/packagecloud.io_chef_stable_ubuntu_dists_lucid_main_*
+
+chef-server-ctl install opscode-manage
+
+/opt/opscode-manage/embedded/bin/runsvdir-start &
+
 chef-server-ctl reconfigure && opscode-manage-ctl reconfigure
+
+## Reporting
+chef-server-ctl install opscode-reporting
+
+/opt/opscode-reporting/embedded/bin/runsvdir-start &
+
+chef-server-ctl reconfigure && opscode-reporting-ctl reconfigure
+
+chef-server-ctl user-create jshrack Jason Shrack jshrack@gmail.com mT1MIVdheo20 --filename /root/chef_server_admin.pem && \
+chef-server-ctl org-create killbox1a "KillBox1A" --association_user jshrack --filename /root/killbox1a-validator.pem
 
 tail -F /opt/opscode/embedded/service/*/log/current
