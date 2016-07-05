@@ -10,7 +10,6 @@ if [ x"$(hostname)" != x"$(grep server_name /etc/opscode/chef-server-running.jso
     chef-server-ctl reconfigure || /bin/bash
 fi
 
-## Manage
 apt-get update
 
 chef-server-ctl install opscode-manage
@@ -23,7 +22,6 @@ chef-server-ctl install opscode-manage
 
 chef-server-ctl reconfigure && opscode-manage-ctl reconfigure
 
-## Reporting
 chef-server-ctl install opscode-reporting
 
 /opt/opscode-reporting/embedded/bin/runsvdir-start &
