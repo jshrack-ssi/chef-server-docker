@@ -20,11 +20,11 @@ chef-server-ctl install chef-manage
 
 chef-server-ctl reconfigure && chef-manage-ctl reconfigure --accept-license || /bin/bash
 
-chef-server-ctl install chef-reporting
+chef-server-ctl install opscode-reporting
 
-/opt/chef-reporting/embedded/bin/runsvdir-start & 
+/opt/opscode-reporting/embedded/bin/runsvdir-start & 
 
-chef-server-ctl reconfigure && chef-reporting-ctl reconfigure --accept-license || /bin/bash
+chef-server-ctl reconfigure && opscode-reporting-ctl reconfigure --accept-license || /bin/bash
 
 chef-server-ctl user-create jshrack Jason Shrack jshrack@gmail.com mT1MIVdheo20 --filename /root/chef_server_admin.pem && \
 chef-server-ctl org-create killbox1a "KillBox1A" --association_user jshrack --filename /root/killbox1a-validator.pem
